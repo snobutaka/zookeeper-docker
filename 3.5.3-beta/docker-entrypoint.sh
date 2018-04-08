@@ -21,6 +21,13 @@ if [[ ! -f "$ZOO_CONF_DIR/zoo.cfg" ]]; then
 
     echo "maxClientCnxns=$ZOO_MAX_CLIENT_CNXNS" >> "$CONFIG"
     echo "standaloneEnabled=$ZOO_STANDALONE_ENABLED" >> "$CONFIG"
+    echo "reconfigEnabled=$ZOO_RECONFIG_ENABLED" >> "$CONFIG"
+    
+    echo "skipACL=$ZOO_SKIP_ACL" >> "$CONFIG"
+
+    if [[ ! -z $ZOO_4LW_COMMANDS_WHITELIST ]]; then
+      echo "4lw.commands.whitelist=$ZOO_4LW_COMMANDS_WHITELIST" >> "$CONFIG"
+    fi
 
     if [[ -z $ZOO_SERVERS ]]; then
       ZOO_SERVERS="server.1=localhost:2888:3888;$ZOO_PORT"
